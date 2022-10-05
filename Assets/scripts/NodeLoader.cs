@@ -8,10 +8,11 @@ public class NodeLoader : MonoBehaviour
     void Awake() {
         string loadMyWhip = JsonFileReader.LoadJsonAsResource("data/main.json");
         myWhip = JsonUtility.FromJson<Root>(loadMyWhip);
-        Debug.Log(myWhip.ToString());
+        JsonFileReader.MapFiller(jsonMap,myWhip);
+        Debug.Log(jsonMap["1"]["name"]);
     }
 
-    public IDictionary<string, dynamic> jsonMap = new Dictionary<string, dynamic>();
+    public Dictionary<string, Dictionary<string, dynamic>> jsonMap = new Dictionary<string, Dictionary<string, dynamic>>();
     
     // Start is called before the first frame update
     void Start()
