@@ -8,8 +8,7 @@ public class NodeLoader : MonoBehaviour
     void Awake() {
         string loadMyWhip = JsonFileReader.LoadJsonAsResource("data/main.json");
         myWhip = JsonUtility.FromJson<Root>(loadMyWhip);
-        JsonFileReader.MapFiller(jsonMap,myWhip);
-        Debug.Log(jsonMap["1"]["name"]);
+        JsonFileReader.FillMap(jsonMap,myWhip);
     }
 
     public Dictionary<string, Dictionary<string, dynamic>> jsonMap = new Dictionary<string, Dictionary<string, dynamic>>();

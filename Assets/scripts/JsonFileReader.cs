@@ -11,7 +11,7 @@ public class JsonFileReader
         return loadedJsonFile.text;
     }
 
-    public static void MapFiller(
+    public static void FillMap(
         Dictionary<string, Dictionary<string, dynamic>> toFillDict,
         Root jsonObject
     )
@@ -19,20 +19,143 @@ public class JsonFileReader
         foreach (Node node in jsonObject.main.nodes)
         {
             if (node.nodeType == "SNode")
-            {   
-                List<string> elementList = new List<string>();
-                foreach(NodeElement nodeElements in node.nodeElements) {
-                    switch (nodeElements.elementType) {
+            {
+                List<dynamic> elementList = new List<dynamic>();
+                foreach (NodeElement nodeElements in node.nodeElements)
+                {
+                    switch (nodeElements.elementType)
+                    {
                         case "Sound":
-                        {
-                            elementList.Add(nodeElements.sound.objectId);
-                            break;
-                        }
+                            {
+                                elementList
+                                    .Add(toFillDict[nodeElements
+                                        .sound
+                                        .objectId]);
+                                var elementDictContent =
+                                    new Dictionary<string, dynamic>()
+                                    {
+                                        {
+                                            "objectName",
+                                            nodeElements.sound.objectName
+                                        },
+                                        {
+                                            "audioType",
+                                            nodeElements.sound.audioType
+                                        },
+                                        {
+                                            "audioUrl",
+                                            nodeElements.sound.audioUrl
+                                        },
+                                        { "loop", nodeElements.sound.loop },
+                                        { "volume", nodeElements.sound.volume },
+                                        { "pitch", nodeElements.sound.pitch },
+                                        {
+                                            "spatialMode",
+                                            nodeElements.sound.spatialMode
+                                        },
+                                        {
+                                            "minDistance",
+                                            nodeElements.sound.minDistance
+                                        },
+                                        {
+                                            "maxDistance",
+                                            nodeElements.sound.maxDistance
+                                        },
+                                        {
+                                            "startTime",
+                                            nodeElements.sound.startTime
+                                        },
+                                        {
+                                            "endTime",
+                                            nodeElements.sound.endTime
+                                        }
+                                    };
+                                toFillDict
+                                    .Add(nodeElements.sound.objectId,
+                                    elementDictContent);
+                                break;
+                            }
                         case "Character":
-                        {
-                            elementList.Add(nodeElements.character.id);
-                            break;
-                        }
+                            {
+                                elementList
+                                    .Add(toFillDict[nodeElements.character.id]);
+                                var characterElementList = new List<dynamic>();
+                                foreach (Element
+                                    element
+                                    in
+                                    nodeElements.character.elements
+                                )
+                                {
+                                    characterElementList
+                                        .Add(toFillDict[element.id]);
+                                    var characterElementDict =
+                                        new Dictionary<string, dynamic>()
+                                        {
+                                            {
+                                                "elementType",
+                                                element.elementType
+                                            },
+                                            {
+                                                "elementInfo",
+                                                toFillDict[element
+                                                    .animation
+                                                    .animationId]
+                                            }
+                                        };
+                                    toFillDict
+                                        .Add(element.id, characterElementDict);
+                                    var characterElementDictContent =
+                                        new Dictionary<string, dynamic>()
+                                        {
+                                            { "name", element.animation.name },
+                                            {
+                                                "destination",
+                                                element.animation.destination
+                                            },
+                                            {
+                                                "startTime",
+                                                element.animation.startTime
+                                            },
+                                            {
+                                                "endTime",
+                                                element.animation.endTime
+                                            },
+                                            {
+                                                "loopCount",
+                                                element.animation.loopCount
+                                            }
+                                        };
+                                    toFillDict
+                                        .Add(element.animation.animationId,
+                                        characterElementDictContent);
+                                }
+                                var elementDictContent =
+                                    new Dictionary<string, dynamic>()
+                                    {
+                                        { "name", nodeElements.character.name },
+                                        {
+                                            "startTime",
+                                            nodeElements.character.startTime
+                                        },
+                                        {
+                                            "endTime",
+                                            nodeElements.character.endTime
+                                        },
+                                        {
+                                            "model",
+                                            nodeElements.character.model
+                                        },
+                                        {
+                                            "origin",
+                                            nodeElements.character.origin
+                                        },
+                                        { "elements", characterElementList }
+                                    };
+                                toFillDict
+                                    .Add(nodeElements.character.id,
+                                    elementDictContent);
+                                break;
+                            }
                     }
                 }
                 var contentDict =
@@ -44,15 +167,31 @@ public class JsonFileReader
                         { "startTime", node.startTime },
                         { "endTime", node.endTime },
                         { "origin", node.origin },
-                        {"nodeElements", elementList},
+                        { "nodeElements", elementList }
                     };
-                foreach(NodeElement nodeElem in node.nodeElements){
-                    
-                }
                 toFillDict.Add(node.nodeId.ToString(), contentDict);
+            }
+            else
+            {
+                var conditionList = new List<dynamic>();
+                foreach (Condition condition in node.conditions)
+                {
+                    var conditionContent =
+                        new Dictionary<string, dynamic>()
+                        {
+                            { "conditionType", condition.conditionType },
+                            { "event", condition.@event }
+                        };
+                    conditionList.Add (conditionContent);
+                }
+                var contentDict =
+                    new Dictionary<string, dynamic>()
+                    {
+                        { "name", node.name },
+                        { "nodeType", node.nodeType },
+                        { "conditions", conditionList }
+                    };
             }
         }
     }
-
-    // public static void MapFiller()
 }
