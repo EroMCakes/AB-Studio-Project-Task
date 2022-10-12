@@ -27,10 +27,6 @@ public class JsonFileReader
                     {
                         case "Sound":
                             {
-                                elementList
-                                    .Add(toFillDict[nodeElements
-                                        .sound
-                                        .objectId]);
                                 var elementDictContent =
                                     new Dictionary<string, dynamic>()
                                     {
@@ -73,12 +69,14 @@ public class JsonFileReader
                                 toFillDict
                                     .Add(nodeElements.sound.objectId,
                                     elementDictContent);
+                                elementList
+                                    .Add(toFillDict[nodeElements
+                                        .sound
+                                        .objectId]);
                                 break;
                             }
                         case "Character":
                             {
-                                elementList
-                                    .Add(toFillDict[nodeElements.character.id]);
                                 var characterElementList = new List<dynamic>();
                                 foreach (Element
                                     element
@@ -86,24 +84,6 @@ public class JsonFileReader
                                     nodeElements.character.elements
                                 )
                                 {
-                                    characterElementList
-                                        .Add(toFillDict[element.id]);
-                                    var characterElementDict =
-                                        new Dictionary<string, dynamic>()
-                                        {
-                                            {
-                                                "elementType",
-                                                element.elementType
-                                            },
-                                            {
-                                                "elementInfo",
-                                                toFillDict[element
-                                                    .animation
-                                                    .animationId]
-                                            }
-                                        };
-                                    toFillDict
-                                        .Add(element.id, characterElementDict);
                                     var characterElementDictContent =
                                         new Dictionary<string, dynamic>()
                                         {
@@ -128,6 +108,25 @@ public class JsonFileReader
                                     toFillDict
                                         .Add(element.animation.animationId,
                                         characterElementDictContent);
+                                    
+                                    var characterElementDict =
+                                        new Dictionary<string, dynamic>()
+                                        {
+                                            {
+                                                "elementType",
+                                                element.elementType
+                                            },
+                                            {
+                                                "elementInfo",
+                                                toFillDict[element
+                                                    .animation
+                                                    .animationId]
+                                            }
+                                        };
+                                    toFillDict
+                                        .Add(element.id, characterElementDict);
+                                    characterElementList
+                                        .Add(toFillDict[element.id]);
                                 }
                                 var elementDictContent =
                                     new Dictionary<string, dynamic>()
@@ -154,6 +153,8 @@ public class JsonFileReader
                                 toFillDict
                                     .Add(nodeElements.character.id,
                                     elementDictContent);
+                                elementList
+                                    .Add(toFillDict[nodeElements.character.id]);
                                 break;
                             }
                     }
@@ -194,4 +195,14 @@ public class JsonFileReader
             }
         }
     }
+
+    // public void AddNode(dynamic node) {
+    //     switch (node.GetType().ToString()) {
+    //         case typeof(Node):
+    //         {
+
+    //             break;
+    //         }
+    //     }
+    // }
 }
