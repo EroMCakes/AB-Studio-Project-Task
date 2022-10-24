@@ -1,0 +1,27 @@
+{
+    "sceneName": "halloween",
+    "main":{
+        "nodes": [
+            {
+                "name": "S-NODE 1",
+                "nodeId": 1,
+                "nodeType": "SceneNode",
+                "nextNodeId": 2,
+                "nodeElements": [
+                    {
+                        "elementType": "TrackedImage",
+                        "TrackedImage": {
+                            "objectName": "objectName",
+                            "objectId": "ff05d1a6",
+                            "imageType": ".jpeg",
+                            "umageURL": "https://drive.google.com/file/d/121PnMrR6pfZf2txgul1AHAVlWULBMNRF/view?usp=sharing",
+                            "sizeIRL": [
+                                0.1,0.1,0.1
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

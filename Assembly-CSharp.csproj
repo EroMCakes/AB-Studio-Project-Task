@@ -36,13 +36,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\jsonTrackableImageModel.cs" />
-     <Compile Include="Assets\scripts\TrackableImageJsonReader.cs" />
-     <Compile Include="Assets\scripts\ImageTracking.cs" />
-     <Compile Include="Assets\scripts\Whip.cs" />
-     <Compile Include="Assets\scripts\JsonFileReader.cs" />
-     <Compile Include="Assets\scripts\NodeLoader.cs" />
-     <Compile Include="Assets\scripts\jsonDataModel.cs" />
+     <Compile Include="Assets\Image Detection\Scripts\jsonTrackableImageModel.cs" />
+     <Compile Include="Assets\Image Detection\Scripts\ParsedJsonAssetFunctions.cs" />
+     <Compile Include="Assets\Image Detection\Scripts\TrackableImageJsonReader.cs" />
+     <Compile Include="Assets\Image Detection\Scripts\ImageTracking.cs" />
+     <Compile Include="Assets\scripts\technicalAssignment\Whip.cs" />
+     <Compile Include="Assets\scripts\technicalAssignment\JsonFileReader.cs" />
+     <Compile Include="Assets\scripts\technicalAssignment\NodeLoader.cs" />
+     <Compile Include="Assets\scripts\technicalAssignment\jsonDataModel.cs" />
+     <Compile Include="Assets\Image Detection\Scripts\Demo.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.5f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
